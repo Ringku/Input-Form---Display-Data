@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Field and View</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+    .result-container {
+      margin-top: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .result-container h3 {
+      margin-bottom: 10px;
+    }
+    .result-container ul {
+      list-style: none;
+      padding: 0;
+    }
+    .result-container li {
+      background: #f9f9f9;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Input Form</h2>
+  <input type="text" id="field1" placeholder="Enter First Field">
+  <input type="text" id="field2" placeholder="Enter Second Field">
+  <button onclick="saveData()">Submit</button>
+</div>
+
+<div class="result-container">
+  <h3>Submitted Data:</h3>
+  <ul id="resultList"> <br>
+    <!-- Submitted data will appear here -->
+  </ul>
+</div>
+
+<script>
+  let data = [];
+  
+  function saveData() {
+    // Get values from input fields
+    const field1 = document.getElementById("field1").value;
+    const field2 = document.getElementById("field2").value;
+    
+    if (field1.trim() === "" || field2.trim() === "") {
+      alert("Both fields are required!");
+      return;
+    }
+    
+    // Add data to the array
+    data.push({ field1, field2 });
+    
+    // Clear input fields
+    document.getElementById("field1").value = "";
+    document.getElementById("field2").value = "";
+    
+    // Update result list
+    displayData();
+  }
+  
+  function displayData() {
+    const resultList = document.getElementById("resultList");
+    resultList.innerHTML = ""; // Clear existing list
+    
+    data.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.textContent = `${index + 1}. Field A: ${item.field1}, Field B: ${item.field2}`;
+      resultList.appendChild(li);
+    });
+  }
+</script>
+
+</body>
+</html>
